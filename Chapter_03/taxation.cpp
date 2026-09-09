@@ -26,3 +26,50 @@
 // Enter the residence status: 0
 // Enter the taxable income: 4,000,000
 // Tax is 118000.
+#include<iostream>
+
+using namespace std;
+
+int main(){
+    
+    int ResidenceStatus;
+    double TaxableIncome, tax;
+
+    cout << "Enter the residence status (0 - resident, 1 - non-resident): ";
+    cin >> ResidenceStatus;
+
+    cout << "Enter the taxable income: ";
+    cin >> TaxableIncome;
+
+    if (ResidenceStatus == 0) { // Resident
+        if (TaxableIncome <= 2820000) {
+            tax = 0;// No tax for residents earning up to 2,820,000
+        } else if (TaxableIncome <= 4020000) {
+            tax = (TaxableIncome - 2820000) * 0.10;// 10% tax for residents earning between 2,820,000 and 4,020,000
+        } else if (TaxableIncome <= 4920000) {
+            tax = (TaxableIncome - 4020000) * 0.20 + 120000;// 20% tax for residents earning between 4,020,000 and 4,920,000
+        } else if (TaxableIncome <= 120000000) {
+            tax = (TaxableIncome - 4920000) * 0.30 + 300000;// 30% tax for residents earning between 4,920,000 and 120,000,000
+        } else {
+            tax = ((TaxableIncome - 4920000) * 0.30 + 300000) + ((TaxableIncome - 120000000) * 0.10);
+            // Additional 10% tax for residents earning above 120,000,000
+        }
+    } else { // Non-resident
+        if (TaxableIncome <= 2820000) {
+            tax = TaxableIncome * 0.10;// 10% tax for non-residents earning up to 2,820,000
+        } else if (TaxableIncome <= 4020000) {
+            tax = TaxableIncome * 0.10;// 10% tax for non-residents earning between 2,820,000 and 4,020,000
+        } else if (TaxableIncome <= 4920000) {
+            tax = (TaxableIncome - 4020000) * 0.20 + 402000;// 20% tax for non-residents earning between 4,020,000 and 4,920,000
+        } else if (TaxableIncome <= 120000000) {
+            tax = (TaxableIncome - 4920000) * 0.30 + 582000 ;// 30% tax for non-residents earning between 4,920,000 and 120,000,000
+        } else {
+            tax = ((TaxableIncome - 4920000) * 0.30 + 582000) + ((TaxableIncome - 120000000) * 0.10);
+            // Additional 10% tax for non-residents earning above 120,000,000
+        }
+    }
+
+    cout << "Tax is " << tax << "." << endl;
+
+    return 0;
+}
